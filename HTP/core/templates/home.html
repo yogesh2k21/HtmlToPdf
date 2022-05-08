@@ -7,9 +7,24 @@
     <title>Document</title>
 </head>
 <body>
+    {% load static %}
     django htmltopdf testing
 
-
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <h3 id="h1">Enter Data For Generating QR Code <input type="text" name="data" ></h3>
+        <input type="submit" value="SUBMIT">
+    </form>
+    
     <a href="{% url 'gen' %}">Generate PDF</a>
+
+    <div>
+        {{data}}
+        {% if data %}
+        <h4>Your QR Code is:</h4>
+            <img src="http://127.0.0.1:8000/media/{{data}}.png">
+        {% endif %}
+    </div>
+
 </body>
 </html>

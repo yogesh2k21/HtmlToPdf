@@ -6,12 +6,13 @@ import xhtml2pdf.pisa as pisa
 
 class Render:
 
-    @staticmethod
+    # @staticmethod
     def render(path: str, t: dict):
         template = get_template(path)
         html = template.render(t)
         response = BytesIO()
-        pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
+        # pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), response)
+        pdf = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), response)
         if not pdf.err:
             return HttpResponse(response.getvalue(), content_type='application/pdf')
         else:
